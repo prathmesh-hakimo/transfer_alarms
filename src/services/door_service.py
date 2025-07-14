@@ -29,8 +29,8 @@ def get_door_from_destination(destination_connection, door_data):
     door = cursor.fetchone()
 
     if door:
-        logger.info(f"Door with name '{door_data['door_name']}' already exists in the destination database with ID: {door['id']}.")
+        logger.info(f"🚪 Door with name '{door_data['door_name']}' already exists in the destination database with ID: {door['id']}.")
         return door
     else:
-        logger.info(f"Door with name '{door_data['door_name']}' does not exist in the destination database.")
+        logger.info(f"🚪 Door with name '{door_data['door_name']}' does not exist in the destination database.")
         return None 

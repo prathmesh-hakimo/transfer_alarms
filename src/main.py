@@ -11,7 +11,6 @@ from src.services.alarm_service import prepare_new_raw_alarm_data, insert_raw_al
 from src.models.state import DuplicationState
 from src.utils.logger import get_logger, add_file_handler
 import uuid
-import json
 
 def main(original_raw_alarm_id):
     new_camera_id = '259e78d5-6ed1-4853-8b50-ca5413d0e2b4'
@@ -54,24 +53,23 @@ def main(original_raw_alarm_id):
             raw_alarm = conflict_info.get('raw_alarm')
             camera = conflict_info.get('camera')
             location_alarms = conflict_info.get('location_alarms')
-            # Log only important fields
             if raw_alarm:
                 important_fields = ['id', 'source_id', 'partition_key', 'alarm_type_id', 'source_entity_id', 'tenant_id', 'alarm_timestamp_utc', 'current_status']
                 logger.warning("Existing Raw Alarm Details:")
                 for field in important_fields:
-                    logger.warning(f"  {field}: {raw_alarm.get(field)}")
+                    logger.warning(f"   {field}: {raw_alarm.get(field)}")
             else:
-                logger.warning("Raw Alarm: Not found")
+                logger.warning("⚠️ Raw Alarm: Not found")
             if camera:
                 logger.warning(f"Camera ID: {camera.get('id')}, Name: {camera.get('camera_name')}, Location ID: {camera.get('location_id')}")
             else:
-                logger.warning("Camera: Not found")
+                logger.warning("⚠️ Camera: Not found")
             if location_alarms:
                 logger.warning("Location Alarm IDs with same location:")
                 for la in location_alarms:
-                    logger.warning(f"  {la.get('id')}")
+                    logger.warning(f"⚠️   {la.get('id')}")
             else:
-                logger.warning("No location alarms found for this location.")
+                logger.warning("⚠️ No location alarms found for this location.")
         return
 
     # 2️⃣ Handle Door
@@ -83,11 +81,11 @@ def main(original_raw_alarm_id):
             existing_door = get_door_from_destination(dest_conn, door_data)
             if existing_door:
                 new_door_id = existing_door['id']
-                logger.info(f"Door already exists in destination with ID: {new_door_id}")
+                logger.info(f"✅ Door already exists in destination with ID: {new_door_id}")
             else:
                 new_door_id = str(uuid.uuid4())
                 insert_door_data_to_destination(dest_conn, door_data, new_door_id)
-                logger.info(f"Inserted new door with ID: {new_door_id}")
+                logger.info(f"✅ Inserted new door with ID: {new_door_id}")
 
     # 3️⃣ Handle Employee
     new_employee_id = None
@@ -98,11 +96,11 @@ def main(original_raw_alarm_id):
             existing_employee = get_employee_from_destination(dest_conn, employee_data)
             if existing_employee:
                 new_employee_id = existing_employee['id']
-                logger.info(f"Employee already exists in destination with ID: {new_employee_id}")
+                logger.info(f"✅ Employee already exists in destination with ID: {new_employee_id}")
             else:
                 new_employee_id = str(uuid.uuid4())
                 insert_employee_data_to_destination(dest_conn, employee_data, new_employee_id)
-                logger.info(f"Inserted new employee with ID: {new_employee_id}")
+                logger.info(f"✅ Inserted new employee with ID: {new_employee_id}")
 
     # 4️⃣ Resolve Alarm Type
     source_alarm_type_id = get_alarm_type_id(source_conn, original_raw_alarm_id)
@@ -150,7 +148,7 @@ def main(original_raw_alarm_id):
             if new_ml_output_id:
                 insert_video_tags_to_destination(dest_conn, video_tags, new_ml_output_id, new_tenant_id)
                 new_alarm_data['ml_output_id'] = new_ml_output_id
-                logger.info(f"ML Output and {len(video_tags)} video tags migrated.")
+                logger.info(f"✅ ML Output and {len(video_tags)} video tags migrated.")
 
     # 9️⃣ Handle Alarm Updates + Users
     alarm_updates = fetch_alarm_updates(source_conn, original_raw_alarm_id)
@@ -159,7 +157,7 @@ def main(original_raw_alarm_id):
         last_update_id = insert_alarm_updates(dest_conn, source_conn, alarm_updates, new_alarm_id, new_tenant_id)
         if last_update_id:
             new_alarm_data['alarm_update_id'] = last_update_id
-            logger.info(f"Alarm updates migrated. Last update ID: {last_update_id}")
+            logger.info(f"✅ Alarm updates migrated. Last update ID: {last_update_id}")
 
     # 🔟 Add migrated IDs to raw alarm
     new_alarm_data['door_id'] = new_door_id
