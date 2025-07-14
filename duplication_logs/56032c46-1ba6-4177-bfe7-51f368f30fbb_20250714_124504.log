@@ -1,0 +1,10 @@
+[2025-07-14 12:45:04,026] INFO alarm_migration: 🚀 Starting Alarm Migration Process
+[2025-07-14 12:45:11,026] INFO alarm_migration: ✅ Original alarm fetched.
+[2025-07-14 12:45:13,884] INFO alarm_migration: Door already exists in destination with ID: 9c6f2314-3ed6-4ba8-afc8-2c140316475c
+[2025-07-14 12:45:17,068] INFO alarm_migration: ✅ Media record fetched.
+[2025-07-14 12:45:18,217] INFO alarm_migration: ✅ Media inserted with ID: 224312940
+[2025-07-14 12:45:22,273] INFO alarm_migration: ML Output and 1 video tags migrated.
+[2025-07-14 12:45:26,291] INFO alarm_migration: Alarm updates migrated. Last update ID: a20479db-c5f4-41d8-818a-3452314f6a5c
+[2025-07-14 12:45:26,292] INFO alarm_migration: 📥 Inserting raw alarm with ID: 10e25cc7-e4ec-4581-a985-97e1d6312857
+[2025-07-14 12:45:31,159] INFO alarm_migration: ✅ Raw alarm inserted successfully with ID: 10e25cc7-e4ec-4581-a985-97e1d6312857
+[2025-07-14 12:45:31,161] INFO alarm_migration: ✅ Migration complete. Connections closed.
