@@ -1,0 +1,14 @@
+[2025-07-14 12:41:55,242] INFO alarm_migration: 🚀 Starting Alarm Migration Process
+[2025-07-14 12:42:06,365] INFO alarm_migration: ✅ Original alarm fetched.
+[2025-07-14 12:42:06,936] WARNING alarm_migration: ⚠️ Duplicate alarm detected in destination for source_id=5, tenant_id=demo-sales, partition_key=202103. Skipping migration.
+[2025-07-14 12:42:08,381] WARNING alarm_migration: Existing Raw Alarm Details:
+[2025-07-14 12:42:08,381] WARNING alarm_migration:   id: 4fc9797e-066f-4975-a91a-a68b0c2eba51
+[2025-07-14 12:42:08,382] WARNING alarm_migration:   source_id: 5
+[2025-07-14 12:42:08,382] WARNING alarm_migration:   partition_key: 202103
+[2025-07-14 12:42:08,382] WARNING alarm_migration:   alarm_type_id: acf15f45-1c8f-426a-8b78-5dbbfef95c36
+[2025-07-14 12:42:08,382] WARNING alarm_migration:   source_entity_id: 259e78d5-6ed1-4853-8b50-ca5413d0e2b4
+[2025-07-14 12:42:08,382] WARNING alarm_migration:   tenant_id: demo-sales
+[2025-07-14 12:42:08,382] WARNING alarm_migration:   alarm_timestamp_utc: 2021-03-22 22:17:42
+[2025-07-14 12:42:08,382] WARNING alarm_migration:   current_status: Pending
+[2025-07-14 12:42:08,382] WARNING alarm_migration: Camera ID: 259e78d5-6ed1-4853-8b50-ca5413d0e2b4, Name: Hakimo Parking Lot Camera, Location ID: 1375
+[2025-07-14 12:42:08,382] WARNING alarm_migration: No location alarms found for this location.

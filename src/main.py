@@ -37,6 +37,43 @@ def main(original_raw_alarm_id):
         return
     logger.info("✅ Original alarm fetched.")
 
+    # Extract unique fields for duplicate check
+    source_id = original_alarm.get('source_id')
+    partition_key = original_alarm.get('partition_key')
+    tenant_id = new_tenant_id
+
+    # Check for duplicate in destination
+    from src.services.alarm_service import find_existing_raw_alarm, find_conflicting_location_alarm_info
+    existing_alarm = find_existing_raw_alarm(dest_conn, source_id, tenant_id, partition_key)
+    if existing_alarm:
+        logger.warning(
+            f"⚠️ Duplicate alarm detected in destination for source_id={source_id}, tenant_id={tenant_id}, partition_key={partition_key}. Skipping migration."
+        )
+        conflict_info = find_conflicting_location_alarm_info(dest_conn, source_id, tenant_id, partition_key)
+        if conflict_info:
+            raw_alarm = conflict_info.get('raw_alarm')
+            camera = conflict_info.get('camera')
+            location_alarms = conflict_info.get('location_alarms')
+            # Log only important fields
+            if raw_alarm:
+                important_fields = ['id', 'source_id', 'partition_key', 'alarm_type_id', 'source_entity_id', 'tenant_id', 'alarm_timestamp_utc', 'current_status']
+                logger.warning("Existing Raw Alarm Details:")
+                for field in important_fields:
+                    logger.warning(f"  {field}: {raw_alarm.get(field)}")
+            else:
+                logger.warning("Raw Alarm: Not found")
+            if camera:
+                logger.warning(f"Camera ID: {camera.get('id')}, Name: {camera.get('camera_name')}, Location ID: {camera.get('location_id')}")
+            else:
+                logger.warning("Camera: Not found")
+            if location_alarms:
+                logger.warning("Location Alarm IDs with same location:")
+                for la in location_alarms:
+                    logger.warning(f"  {la.get('id')}")
+            else:
+                logger.warning("No location alarms found for this location.")
+        return
+
     # 2️⃣ Handle Door
     new_door_id = None
     door_id = original_alarm.get('door_id')
@@ -72,7 +109,7 @@ def main(original_raw_alarm_id):
     source_alarm_type = get_alarm_type(source_conn, source_alarm_type_id)
     destination_alarm_type_id = get_respective_alarm_type_id_from_destination(dest_conn, source_alarm_type)
     if not destination_alarm_type_id:
-        logger.warning(f"⚠️ No mapped alarm type for '{source_alarm_type}'. Using fallback.")
+        logger.warning(f"⚠️ No mapped alarm type for '{source_alarm_type}'. Using predefined alarm type ID 'acf15f45-1c8f-426a-8b78-5dbbfef95c36'.")
         destination_alarm_type_id = "acf15f45-1c8f-426a-8b78-5dbbfef95c36"
 
     # 5️⃣ Fetch Media
@@ -139,9 +176,6 @@ def main(original_raw_alarm_id):
     else:
         logger.error("❌ Failed to insert raw alarm.")
 
-    # Log summary
-    logger.info("Duplication summary:")
-    logger.info(json.dumps(state.get_summary(), indent=2))
 
     source_conn.close()
     dest_conn.close()

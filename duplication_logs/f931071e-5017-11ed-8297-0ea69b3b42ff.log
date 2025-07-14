@@ -1,0 +1,28 @@
+[2025-07-14 11:59:12,994] INFO alarm_migration: 🚀 Starting Alarm Migration Process
+[2025-07-14 11:59:13,001] ERROR alarm_migration: ❌ Failed to connect to source or destination DB. Exiting.
+[2025-07-14 12:00:04,429] INFO alarm_migration: 🚀 Starting Alarm Migration Process
+[2025-07-14 12:00:16,847] INFO alarm_migration: ✅ Original alarm fetched.
+[2025-07-14 12:00:19,202] INFO alarm_migration: Inserted new door with ID: aaf080b8-4cd0-4cc6-a207-1c07efe15833
+[2025-07-14 12:00:22,313] INFO alarm_migration: ✅ Media record fetched.
+[2025-07-14 12:00:23,821] INFO alarm_migration: ✅ Media inserted with ID: 224279814
+[2025-07-14 12:00:28,389] INFO alarm_migration: ML Output and 2 video tags migrated.
+[2025-07-14 12:00:29,272] INFO alarm_migration: 📥 Inserting raw alarm with ID: 20fe0335-2683-4c81-8c22-ffd2de369af0
+[2025-07-14 12:00:30,333] INFO alarm_migration: ✅ Raw alarm inserted successfully with ID: 20fe0335-2683-4c81-8c22-ffd2de369af0
+[2025-07-14 12:00:30,334] INFO alarm_migration: Duplication summary:
+[2025-07-14 12:00:30,334] INFO alarm_migration: {
+  "original_camera_ids": [],
+  "new_camera_ids": [],
+  "camera_names": [],
+  "new_alarm_ids": [
+    "20fe0335-2683-4c81-8c22-ffd2de369af0"
+  ],
+  "location_alarm_count": 1,
+  "location_alarm_ids": [
+    "20fe0335-2683-4c81-8c22-ffd2de369af0"
+  ],
+  "sop_count": 0,
+  "sop_ids": [],
+  "location_contact_count": 0,
+  "location_contact_ids": []
+}
+[2025-07-14 12:00:30,334] INFO alarm_migration: ✅ Migration complete. Connections closed.

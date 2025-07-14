@@ -1,5 +1,8 @@
 import uuid
 import json
+from src.utils.logger import get_logger
+
+logger = get_logger("ml_service")
 
 def fetch_ml_output_by_id(source_conn, ml_output_id):
     try:
@@ -8,7 +11,7 @@ def fetch_ml_output_by_id(source_conn, ml_output_id):
         cursor.execute(query, (ml_output_id,))
         return cursor.fetchone()
     except Exception as e:
-        print(f"❌ Error fetching ML Output: {e}")
+        logger.error(f"❌ Error fetching ML Output: {e}")
         return None
 
 def fetch_video_tags_by_ml_output_id(source_conn, ml_output_id):
@@ -18,7 +21,7 @@ def fetch_video_tags_by_ml_output_id(source_conn, ml_output_id):
         cursor.execute(query, (ml_output_id,))
         return cursor.fetchall()
     except Exception as e:
-        print(f"❌ Error fetching video tags: {e}")
+        logger.error(f"❌ Error fetching video tags: {e}")
         return []
 
 def insert_ml_output_to_destination(dest_conn, ml_output_data, new_alarm_id, new_tenant_id):
@@ -48,11 +51,11 @@ def insert_ml_output_to_destination(dest_conn, ml_output_data, new_alarm_id, new
         cursor.execute(query, values)
         dest_conn.commit()
 
-        print(f"✅ Inserted ML Output with new ID: {new_ml_output_id}")
+        logger.info(f"✅ Inserted ML Output with new ID: {new_ml_output_id}")
         return new_ml_output_id
 
     except Exception as e:
-        print(f"❌ Error inserting ML Output: {e}")
+        logger.error(f"❌ Error inserting ML Output: {e}")
         dest_conn.rollback()
         return None
 
@@ -78,8 +81,8 @@ def insert_video_tags_to_destination(dest_conn, video_tags, new_ml_output_id, ne
             cursor.execute(query, values)
 
         dest_conn.commit()
-        print(f"✅ Inserted {len(video_tags)} video tag(s) for ML Output ID: {new_ml_output_id}")
+        logger.info(f"✅ Inserted {len(video_tags)} video tag(s) for ML Output ID: {new_ml_output_id}")
 
     except Exception as e:
-        print(f"❌ Error inserting video tags: {e}")
+        logger.error(f"❌ Error inserting video tags: {e}")
         dest_conn.rollback() 

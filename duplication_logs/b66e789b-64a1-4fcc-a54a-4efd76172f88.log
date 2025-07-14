@@ -1,0 +1,27 @@
+[2025-07-14 12:07:25,672] INFO alarm_migration: 🚀 Starting Alarm Migration Process
+[2025-07-14 12:07:33,029] INFO alarm_migration: ✅ Original alarm fetched.
+[2025-07-14 12:07:34,510] INFO alarm_migration: Door already exists in destination with ID: 9c6f2314-3ed6-4ba8-afc8-2c140316475c
+[2025-07-14 12:07:37,478] INFO alarm_migration: ✅ Media record fetched.
+[2025-07-14 12:07:39,212] INFO alarm_migration: ✅ Media inserted with ID: 224285629
+[2025-07-14 12:07:43,042] INFO alarm_migration: ML Output and 1 video tags migrated.
+[2025-07-14 12:07:50,617] INFO alarm_migration: Alarm updates migrated. Last update ID: 3ef0d01c-b01c-4c1c-83f4-42dcb74b79ca
+[2025-07-14 12:07:50,618] INFO alarm_migration: 📥 Inserting raw alarm with ID: 267d295b-395f-4a0d-8421-5435d595c255
+[2025-07-14 12:07:52,104] INFO alarm_migration: ✅ Raw alarm inserted successfully with ID: 267d295b-395f-4a0d-8421-5435d595c255
+[2025-07-14 12:07:52,104] INFO alarm_migration: Duplication summary:
+[2025-07-14 12:07:52,105] INFO alarm_migration: {
+  "original_camera_ids": [],
+  "new_camera_ids": [],
+  "camera_names": [],
+  "new_alarm_ids": [
+    "267d295b-395f-4a0d-8421-5435d595c255"
+  ],
+  "location_alarm_count": 1,
+  "location_alarm_ids": [
+    "267d295b-395f-4a0d-8421-5435d595c255"
+  ],
+  "sop_count": 0,
+  "sop_ids": [],
+  "location_contact_count": 0,
+  "location_contact_ids": []
+}
+[2025-07-14 12:07:52,106] INFO alarm_migration: ✅ Migration complete. Connections closed.

@@ -1,9 +1,13 @@
+from src.utils.logger import get_logger
+logger = get_logger("media_service")
+
+
 def fetch_alarm_media_by_alarm_id(connection, alarm_id):
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM alarm_media WHERE alarm_id = %s", (alarm_id,))
     media_records = cursor.fetchall()
     if len(media_records) != 1:
-        print(f" Warning: Expected 1 media record, found {len(media_records)}")
+        logger.warning(f"Expected 1 media record, found {len(media_records)}")
     return media_records
 
 

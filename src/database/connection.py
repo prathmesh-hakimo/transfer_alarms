@@ -1,12 +1,14 @@
 import mysql.connector
 from mysql.connector import Error
+from src.utils.logger import get_logger
+logger = get_logger("db_connection")
 
 def connect_to_database(config):
     try:
         connection = mysql.connector.connect(**config)
         if connection.is_connected():
-            print("Connected to:", config['database'])
+            logger.info(f"Connected to: {config['database']}")
             return connection
     except Error as e:
-        print(f"Connection error: {e}")
+        logger.error(f"Connection error: {e}")
         return None 

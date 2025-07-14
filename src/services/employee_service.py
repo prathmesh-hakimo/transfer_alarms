@@ -1,3 +1,6 @@
+from src.utils.logger import get_logger
+logger = get_logger("employee_service")
+
 def fetch_employee_data_by_id(source_connection, employee_id):
     cursor = source_connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM employees WHERE id = %s", (employee_id,))
@@ -25,8 +28,8 @@ def get_employee_from_destination(destination_connection, employee_data):
     employee = cursor.fetchone()
 
     if employee:
-        print(f"Employee '{employee_data['first_name']} {employee_data['last_name']}' already exists in the destination database with ID: {employee['id']}.")
+        logger.info(f"Employee '{employee_data['first_name']} {employee_data['last_name']}' already exists in the destination database with ID: {employee['id']}.")
         return employee
     else:
-        print(f"Employee '{employee_data['first_name']} {employee_data['last_name']}' does not exist in the destination database.")
+        logger.info(f"Employee '{employee_data['first_name']} {employee_data['last_name']}' does not exist in the destination database.")
         return None 

@@ -1,5 +1,7 @@
 import json
 import uuid
+from src.utils.logger import get_logger
+logger = get_logger("user_service")
 
 def fetch_user_by_id(connection, user_id):
     try:
@@ -9,14 +11,14 @@ def fetch_user_by_id(connection, user_id):
         user = cursor.fetchone()
 
         if user:
-            print(f"✅ Found user with ID: {user_id}")
+            logger.info(f"Found user with ID: {user_id}")
         else:
-            print(f"ℹ️ No user found with ID: {user_id}")
+            logger.info(f"No user found with ID: {user_id}")
 
         return user
 
     except Exception as e:
-        print(f"❌ Error fetching user: {e}")
+        logger.error(f"Error fetching user: {e}")
         return None
 
     finally:
@@ -38,7 +40,7 @@ def user_exists_in_destination(dest_conn, old_user_id):
         cursor.execute("SELECT id FROM users WHERE id = %s", (old_user_id,))
         return cursor.fetchone() is not None
     except Exception as e:
-        print(f"⚠️ Error checking user existence: {e}")
+        logger.warning(f"Error checking user existence: {e}")
         return False
     finally:
         cursor.close()
@@ -48,12 +50,12 @@ def insert_user_if_not_exists(dest_conn, user_record, new_tenant_id):
     user_email = user_record['email']
 
     if user_exists_in_destination(dest_conn, old_user_id):
-        print(f"✅ User {old_user_id} already exists in destination. Using same ID.")
+        logger.info(f"User {old_user_id} already exists in destination. Using same ID.")
         return old_user_id
 
     existing_user_id_by_email = get_user_id_by_email(dest_conn, user_email)
     if existing_user_id_by_email:
-        print(f"✅ User with email '{user_email}' already exists. Using existing ID: {existing_user_id_by_email}")
+        logger.info(f"User with email '{user_email}' already exists. Using existing ID: {existing_user_id_by_email}")
         return existing_user_id_by_email
 
     new_user_id = str(uuid.uuid4())
@@ -92,11 +94,11 @@ def insert_user_if_not_exists(dest_conn, user_record, new_tenant_id):
 
         cursor.execute(query, values)
         dest_conn.commit()
-        print(f"✅ Inserted user {user_email} with new ID {new_user_id}")
+        logger.info(f"Inserted user {user_email} with new ID {new_user_id}")
         return new_user_id
 
     except Exception as e:
-        print(f"❌ Error inserting user: {e}")
+        logger.error(f"Error inserting user: {e}")
         dest_conn.rollback()
         return None
 

@@ -1,3 +1,6 @@
+from src.utils.logger import get_logger
+logger = get_logger("door_service")
+
 def fetch_door_data_by_id(source_connection, door_id):
     cursor = source_connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM doors WHERE id = %s", (door_id,))
@@ -26,8 +29,8 @@ def get_door_from_destination(destination_connection, door_data):
     door = cursor.fetchone()
 
     if door:
-        print(f"Door with name '{door_data['door_name']}' already exists in the destination database with ID: {door['id']}.")
+        logger.info(f"Door with name '{door_data['door_name']}' already exists in the destination database with ID: {door['id']}.")
         return door
     else:
-        print(f"Door with name '{door_data['door_name']}' does not exist in the destination database.")
+        logger.info(f"Door with name '{door_data['door_name']}' does not exist in the destination database.")
         return None 

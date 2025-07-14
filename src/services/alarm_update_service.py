@@ -1,7 +1,9 @@
 import json
 import uuid
 from src.services.user_service import fetch_user_by_id, insert_user_if_not_exists
-
+from src.utils.logger import get_logger
+logger = get_logger("alarm_update_service")
+# ... existing code ...
 def fetch_alarm_updates(source_conn, original_alarm_id):
     try:
         cursor = source_conn.cursor(dictionary=True)
@@ -10,23 +12,23 @@ def fetch_alarm_updates(source_conn, original_alarm_id):
         updates = cursor.fetchall()
 
         if updates:
-            print(f"✅ Found {len(updates)} alarm update(s) for alarm ID {original_alarm_id}")
+            logger.info(f"Found {len(updates)} alarm update(s) for alarm ID {original_alarm_id}")
         else:
-            print(f"ℹ️ No alarm updates found for alarm ID {original_alarm_id}")
+            logger.info(f"No alarm updates found for alarm ID {original_alarm_id}")
 
         return updates
 
     except Exception as e:
-        print(f"❌ Error fetching alarm_updates: {e}")
+        logger.error(f"Error fetching alarm_updates: {e}")
         return []
 
     finally:
         if cursor:
             cursor.close()
-
+# ... existing code ...
 def insert_alarm_updates(dest_conn, source_conn, updates, new_alarm_id, new_tenant_id):
     if not updates:
-        print("ℹ️ No updates to insert.")
+        logger.info("No updates to insert.")
         return None
 
     cursor = None
@@ -69,18 +71,19 @@ def insert_alarm_updates(dest_conn, source_conn, updates, new_alarm_id, new_tena
             )
 
             cursor.execute(query, values)
-            print(f"✅ Inserted alarm update with new ID {new_update_id}")
+            logger.info(f"Inserted alarm update with new ID {new_update_id}")
             last_inserted_id = new_update_id
 
         dest_conn.commit()
-        print(f"✅ Committed {len(updates)} alarm update(s) for alarm ID {new_alarm_id}")
+        logger.info(f"Committed {len(updates)} alarm update(s) for alarm ID {new_alarm_id}")
         return last_inserted_id
 
     except Exception as e:
-        print(f"❌ Error inserting alarm_updates: {e}")
+        logger.error(f"Error inserting alarm_updates: {e}")
         dest_conn.rollback()
         return None
 
     finally:
         if cursor:
-            cursor.close() 
+            cursor.close()
+# ... existing code ...
