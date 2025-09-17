@@ -1,1 +1,19 @@
 src/database/config.py
+# Python cache
+__pycache__/
+*.pyc
+
+# macOS metadata
+.DS_Store
+
+# Logs
+*.log
+duplication_logs/
+
+
+__pycache__/
+*.pyc
+.DS_Store
+*.log
+duplication_logs/
+
