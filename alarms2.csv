@@ -1,0 +1,56 @@
+raw_alarm_id,logs
+f9310953-5017-11ed-8297-0ea69b3b42ff,"Duplicate alarm detected, skipped."
+b66e789b-64a1-4fcc-a54a-4efd76172f88,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f90,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f89,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f87,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f86,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f85,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f85,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f82,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f80,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f62,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f64,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f65,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f66,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f67,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f68,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f69,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f70,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f81,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f79,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f78,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f77,Success
+b66e789b-64a1-4fcc-a54a-4efd76172f76,Error: cannot access local variable 'cursor' where it is not associated with a value
+b66e789b-64a1-4fcc-a54a-4efd76172f75,Failed to connect to DB
+b66e789b-64a1-4fcc-a54a-4efd76172f74,Failed to connect to DB
+b66e789b-64a1-4fcc-a54a-4efd76172f73,Failed to connect to DB
+b66e789b-64a1-4fcc-a54a-4efd76172f72,Failed to connect to DB
+b66e789b-64a1-4fcc-a54a-4efd76172f71,Failed to connect to DB
+202395ad-7d73-419f-a0f7-dfd92064df65,Failed to connect to DB
+626442ad-8c86-4ac0-9136-7f82a0c21cce,Failed to connect to DB
+56032c46-1ba6-4177-bfe7-51f368f30fbb,Failed to connect to DB
+f87552c1-cf00-49bc-a71d-8f23e7e45746,Failed to connect to DB
+f20c6a8a-d655-43ff-8344-4ab946740bae,Failed to connect to DB
+f93108d7-5017-11ed-8297-0ea69b3b42ff,Failed to connect to DB
+f93107ac-5017-11ed-8297-0ea69b3b42ff,Failed to connect to DB
+f9bfbc32-f794-4139-ad88-e6ac6e7cb820,Failed to connect to DB
+83dfd687-539f-48ff-910f-e8a56e5576f4,Failed to connect to DB
+4cd5c1d2-181d-47d1-a9e8-ad7c4f647b5d,Failed to connect to DB
+6364f327-6f11-4f3c-a652-1cbbb556c69b,Failed to connect to DB
+bbe0b631-c8e3-4c5e-8f99-2ef853c9b691,Failed to connect to DB
+7a14b5fe-1143-4e67-ac50-847bf0b5b2c1,Failed to connect to DB
+31ebaad0-e7ea-488c-9ee0-2c0289518cf6,Failed to connect to DB
+31ebaad0-e7ea-488c-9ee0-2c0289518cf7,Failed to connect to DB
+83dfd687-539f-48ff-910f-e8a56e5576f2,Failed to connect to DB
+26dba102-00cc-4f38-9611-c6c8d34a5381,Failed to connect to DB
+5c6cc523-8026-41c4-86ab-09d0761f74ba,Failed to connect to DB
+f931068f-5017-11ed-8297-0ea69b3b42ff,Failed to connect to DB
+b8ff65bd-6279-4a45-8992-50c2742a43b7,Failed to connect to DB
+e93109ee-5017-11ed-8297-0ea69b3b42fe,Failed to connect to DB
+f9310845-5017-11ed-8297-0ea69b3b42ff,Failed to connect to DB
+f931071e-5017-11ed-8297-0ea69b3b42ff,Failed to connect to DB
+f93105b8-5017-11ed-8297-0ea69b3b42ff,Failed to connect to DB
+f93109ee-5017-11ed-8297-0ea69b3b42ff,Failed to connect to DB
+83dfd687-539f-48ff-910f-e8a56e5576f1,Failed to connect to DB
+50148043-97af-46ca-a5f1-568dd522617f,Failed to connect to DB
